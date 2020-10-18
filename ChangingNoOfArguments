@@ -1,0 +1,84 @@
+package changingnoofarguments;
+
+/**
+ *
+ * @author Ahsan Qadeer
+ */
+
+class Adder
+{
+    
+    static int add(int a,int b)
+    {
+        return a+b;
+    }
+    
+    //Changing no of arguments
+    
+    int add (int a, int b, int c)
+    {
+        return a+b+c;
+    }
+    
+    // changing data types of arguments and method return type
+    static double add(double a, double b)
+    {
+        return a+b;
+    }
+    
+//    the below method is not possible because if we onl chage the return type of method but not 
+//    change the argument types then it will be confused which method to choose 
+  
+//    double add(double a, double b)
+//    {
+//        return a+b;
+//    }
+    
+    //Type promotion
+
+//    static void sum(int a,long b) and static void sum(int a,int b, int c) will
+//    work fine and no matching found here 
+
+    static void sum(int a,long b)
+    {
+        System.out.println(a+b);
+    }  
+    static void sum(int a,int b,int c)
+    {
+        System.out.println(a+b+c);
+    }
+
+    //    static void sum(int a,long b) and static void sum(int a,int b) here
+// matching is found type permothion is not performed 
+
+
+    static void sum(int a,int b)
+    {
+        System.out.println(a+b);
+    }
+    
+    //Type Promotion in case of ambiguity
+    static void plus(int a,long b){System.out.println("a method invoked");}  
+    static void plus(long a,int b){System.out.println("b method invoked");}  
+
+    
+}
+public class ChangingNoOfArguments {
+    public static void main(String[] args) {
+        System.out.println(Adder.add(5,6));
+        System.out.println(new Adder().add(5,6,7));
+        System.out.println(Adder.add(5.5,6.5));
+    
+        //calling type promotion methods when no matching found
+       Adder.sum(5,6);//now second int literal will be promoted to long  
+       Adder.sum(5,6,7);
+       
+        //calling type promotion methods when matching is found
+       Adder.sum(5,6);//now int arg sum() method gets invoked 
+        
+
+        //    Type Promotion in case of ambiguity    
+//            Adder.plus(20,20);  now ambiguity this method will give error 
+  
+    }
+}
